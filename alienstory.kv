@@ -1,0 +1,134 @@
+<AlienScreens>:
+	AlienMain:
+		name: 'main'
+	StoryDisplayer:
+		name: 'showstory'
+		
+####
+<ChoiceButtonGrid>:
+	cols: 1
+	pos_hint: {"y":0}
+	size_hint_x: 1
+	spacing: 2,2
+		
+		
+####
+<GotoMainPopup>:
+	yes:yes
+	no:cancel
+	size_hint: None,None
+	size: 650,450
+	GridLayout:
+		cols: 1
+		Label:
+			id: l
+			text: 'Return to Main Menu'
+			
+		GridLayout:
+			cols: 2
+			spacing: 20,20
+			size_hint: 1,.8
+			Button:
+				id: yes
+				text: 'Yes'
+				
+			Button:
+				id: cancel
+				text: 'Cancel'
+				on_press: root.dismiss()
+				
+####
+<QuitPopup>:
+	size_hint: None,None
+	size: 650,450
+	GridLayout:
+		cols: 1
+		
+		Label:
+			text: 'Exit the App ?'
+			
+		GridLayout:
+			cols: 2
+			spacing: 20,20
+			size_hint: 1,.8
+			
+			Button:
+				text: 'Yes'
+				on_press: app.stop()
+				
+			Button:
+				text: 'No'
+				on_press: root.dismiss()
+	
+
+####
+<StoryDisplayer>:
+	on_pre_enter: self.BeforeEntering()
+	FloatLayout:
+		Button:
+			text: 'Menu'
+			pos_hint: {'top':.99, 'right':.975}
+			size_hint: .25,.055
+			on_press: root.goto_Main()
+			
+		Button:
+			text: 'Back'
+			pos_hint: {'top':.99, 'x':.025}
+			size_hint: .25,.055
+			on_press: root.goBackPop()
+			
+	ScrollView:
+		id: sv
+		size_hint_y: .93
+		pos_hint: {"top":.93}
+		Label:
+			id: lab
+			font_size: 50
+			padding: 30,30
+			size_hint_y: None
+			text_size: self.width,None
+			height: self.texture_size[1]	
+			
+	Label:
+		id: contid
+		text: 'Tap to continue'
+		color: 0,1,0,1
+		size_hint: 1,.05
+		font_size: self.height/2
+		pos_hint: {'y':.01}
+		
+			
+			
+####
+<AlienMain>:
+	FloatLayout:
+		Label:
+			text: 'Life in Space'
+			font_size: 150
+			pos_hint: {'top':.97,'center_x':.5}
+			size_hint_y: None
+			height: self.texture_size[1]	
+			
+		Button:
+			text: 'Continue'
+			font_size: 80
+			size_hint: .3,.06
+			background_color: 0,0,0,0
+			pos_hint: {"center_x":.5,"y":.6}
+			on_press: root.continueStory()
+			
+		Button:
+			text: 'Start'
+			font_size: 80
+			size_hint: .3,.06
+			background_color: 0,0,0,0
+			pos_hint: {"center_x":.5,"y":.4}
+			on_press: root.storyStarter()
+			
+		Button:
+			text: 'Quit'
+			font_size: 80
+			size_hint: .3,.06
+			background_color: 0,0,0,0
+			pos_hint: {"center_x":.5,"y":.2}
+			on_press: root.quitter()
